@@ -27,10 +27,10 @@ Map::Map(std::vector<std::vector<int> > field1) {
 
 	this->map = map;
 
-	for (int i = 0; i < field1.size(); i++) {
-		for (int j = 0; j < field1[i].size(); j++)
+	for (int i = 0; i < 10; ++i) {
+		for (int j = 0; j < 10; ++j)
 			if (1 == field1[i][j])
-				map[i + 3][j + 3] = 'S';
+				this->map[i + 2][j + 3] = 'S';
 	}
 }
 
@@ -54,5 +54,23 @@ void Map::draw() {
 }
 
 void Map::notifyOnMove(int player, int x, int y, bool success) {
+	DWORD dw;
+	COORD here;
 
+	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	if (battleships::players::PLAYER_1 == player) {
+		here.X = x + 18;
+		here.Y = y + 2;
+	} else {
+		here.X = x + 3;
+		here.Y = y + 2;
+	}
+	
+	if (success) {
+		WriteConsoleOutputCharacter(hStdOut, "X", 1, here, &dw);
+	}
+	else {
+		WriteConsoleOutputCharacter(hStdOut, "O", 1, here, &dw);
+	}
 }

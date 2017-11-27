@@ -4,6 +4,10 @@
 #include <vector>
 #include <iostream>
 
+#include <Windows.h>
+
+#include "BattleshipsHelper.h"
+
 class Map {
 public:
 	Map(std::vector<std::vector<int> > field1);

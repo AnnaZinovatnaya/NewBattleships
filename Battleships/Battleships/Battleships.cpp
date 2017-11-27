@@ -1,9 +1,10 @@
 #include "Battleships.h"
 
 Battleships::Battleships() {
+	srand(time(0));
+
 	player1 = new Player();
-	//player2 = new ComputerPlayer();
-	player2 = new Player();
+	player2 = new ComputerPlayer();
 	map = new Map(player1->getField());
 	startTime = 0;
 }
@@ -61,18 +62,18 @@ void Battleships::play() {
 		switch (player1->checkMove(x, y)) {
 		case battleships::playerState::INJURED:
 			player2->notifyOnInjured();
-			map->notifyOnMove(battleships::players::PLAYER_1, x, y, battleships::move::SUCCESS);
+			map->notifyOnMove(battleships::players::PLAYER_2, x, y, battleships::move::SUCCESS);
 			break;
 		case battleships::playerState::SUNK:
 			player2->notifyOnSunk();
-			map->notifyOnMove(battleships::players::PLAYER_1, x, y, battleships::move::SUCCESS);
+			map->notifyOnMove(battleships::players::PLAYER_2, x, y, battleships::move::SUCCESS);
 			break;
 		case battleships::playerState::DEFEATED:
-			map->notifyOnMove(battleships::players::PLAYER_1, x, y, battleships::move::SUCCESS);
+			map->notifyOnMove(battleships::players::PLAYER_2, x, y, battleships::move::SUCCESS);
 			endOfGame = true;
 			break;
 		default:
-			map->notifyOnMove(battleships::players::PLAYER_1, x, y, battleships::move::MISS);
+			map->notifyOnMove(battleships::players::PLAYER_2, x, y, battleships::move::MISS);
 			break;
 		}
 	}
