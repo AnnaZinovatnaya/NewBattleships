@@ -9,6 +9,8 @@
 #include "ComputerPlayer.h"
 #include "Map.h"
 #include "BattleshipsHelper.h"
+#include "State.h"
+#include "WaitForInputState.h"
 
 class Battleships {
 public:
@@ -16,6 +18,14 @@ public:
 	~Battleships();
 
 	void play();
+
+	void changeState(State * newState);
+
+	Player * getPlayerOne();
+	Player * getPlayerTwo();
+	Map * getMap();
+
+	clock_t getStartTime();
 protected:
 private:
 
@@ -25,9 +35,8 @@ private:
 
 	clock_t startTime;
 
-	void pause();
-	void resume();
-	void showResult();
+	State * currentState;
+	State * previousState;
 
 	int getCurrentTimeInSec();
 

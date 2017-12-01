@@ -7,6 +7,8 @@ Battleships::Battleships() {
 	player2 = new ComputerPlayer();
 	map = new Map(player1->getField());
 	startTime = 0;
+	currentState = new WaitForInputState(this);
+	previousState = NULL;
 }
 
 Battleships::~Battleships() {
@@ -31,66 +33,9 @@ void Battleships::play() {
 
 	map->draw();
 
-	bool endOfGame = false;
+	startTime = clock();
 
-	while (!endOfGame) {
-		int x = 0;
-		int y = 0;
-
-		player1->makeMove(x, y);
-
-		switch (player2->checkMove(x, y)) {
-		case battleships::playerState::INJURED:
-			player1->notifyOnInjured();
-			map->notifyOnMove(battleships::players::PLAYER_1, x, y, battleships::move::SUCCESS);
-			break;
-		case battleships::playerState::SUNK:
-			player1->notifyOnSunk();
-			map->notifyOnMove(battleships::players::PLAYER_1, x, y, battleships::move::SUCCESS);
-			break;
-		case battleships::playerState::DEFEATED:
-			map->notifyOnMove(battleships::players::PLAYER_1, x, y, battleships::move::SUCCESS);
-			endOfGame = true;
-			break;
-		default:
-			map->notifyOnMove(battleships::players::PLAYER_1, x, y, battleships::move::MISS);
-			break;
-		}
-
-		player2->makeMove(x, y);
-
-		switch (player1->checkMove(x, y)) {
-		case battleships::playerState::INJURED:
-			player2->notifyOnInjured();
-			map->notifyOnMove(battleships::players::PLAYER_2, x, y, battleships::move::SUCCESS);
-			break;
-		case battleships::playerState::SUNK:
-			player2->notifyOnSunk();
-			map->notifyOnMove(battleships::players::PLAYER_2, x, y, battleships::move::SUCCESS);
-			break;
-		case battleships::playerState::DEFEATED:
-			map->notifyOnMove(battleships::players::PLAYER_2, x, y, battleships::move::SUCCESS);
-			endOfGame = true;
-			break;
-		default:
-			map->notifyOnMove(battleships::players::PLAYER_2, x, y, battleships::move::MISS);
-			break;
-		}
-	}
-
-	showResult();
-}
-
-void Battleships::pause() {
-
-}
-
-void Battleships::resume() {
-
-}
-
-void Battleships::showResult() {
-
+	currentState->doJob();
 }
 
 int Battleships::getCurrentTimeInSec() {
@@ -117,4 +62,34 @@ void Battleships::printWelcomeMessage() {
 	std::cout << " *************************************" << std::endl;
 	std::cout << "\n\n";
 	std::cout << " Press ENTER to start...";
+	std::cout << std::endl;
+}
+
+void Battleships::changeState(State * newState)
+{
+	delete previousState;
+
+	previousState = currentState;
+	currentState = newState;
+	currentState->doJob();
+}
+
+Player * Battleships::getPlayerOne()
+{
+	return player1;
+}
+
+Map * Battleships::getMap()
+{
+	return map;
+}
+
+Player * Battleships::getPlayerTwo()
+{
+	return player2;
+}
+
+clock_t Battleships::getStartTime()
+{
+	return startTime;
 }

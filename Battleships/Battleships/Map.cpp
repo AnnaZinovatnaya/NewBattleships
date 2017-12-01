@@ -50,7 +50,7 @@ void Map::draw() {
 	std::cout << "Press 'p' to pause the game";
 	std::cout << "\n";
 	std::cout << "\n";
-	std::cout << "Type character and digit and press ENTER to hit:\n";
+	std::cout << "Type digit and character and press ENTER to hit:\n";
 }
 
 void Map::notifyOnMove(int player, int x, int y, bool success) {
@@ -60,11 +60,11 @@ void Map::notifyOnMove(int player, int x, int y, bool success) {
 	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	if (battleships::players::PLAYER_1 == player) {
-		here.X = x + 18;
-		here.Y = y + 2;
+		here.X = y + 18;
+		here.Y = x + 2;
 	} else {
-		here.X = x + 3;
-		here.Y = y + 2;
+		here.X = y + 3;
+		here.Y = x + 2;
 	}
 	
 	if (success) {

@@ -6,6 +6,15 @@ Player::Player() {
 
 	this->field = field;
 
+	std::vector<std::vector<int> > enemyMoves(10, row);
+
+	this->enemyMoves = enemyMoves;
+
+	lastLetter = ' ';
+	lastDigit = ' ';
+
+	numberOfSunkShips = 0;
+
 	generateShips();
 
 	//------------------------------------
@@ -30,37 +39,17 @@ Player::~Player() {
 }
 
 void Player::makeMove(int & x, int & y) {
-	char charHumanHit[3] = { "00" };
-	int humanHit[2] = { 0,0 };
 
-	charHumanHit[0] = _getch();
-	putchar(charHumanHit[0]);
-
-	charHumanHit[1] = _getch();
-	putchar(charHumanHit[1]);
-
-	charHumanHit[2] = _getch();
-	putchar(charHumanHit[2]);
-
-	setCursorPosition(0, 17);
-
-	std::cout << "   ";
-
-	setCursorPosition(0, 17);
-
-	humanHit[0] = charHumanHit[0] % '0';
-
-	if (charHumanHit[1] >= 'A' && charHumanHit[1] <= 'J')
+	if (lastLetter >= 'A' && lastLetter <= 'J')
 	{
-		humanHit[1] = charHumanHit[1] % 'A';
+		x = lastLetter % 'A';
 	}
 	else
 	{
-		humanHit[1] = charHumanHit[1] % 'a';
+		x = lastLetter % 'a';
 	}
 
-	x = humanHit[0];
-	y = humanHit[1];
+	y = lastDigit % '0';
 
 	myfile << "Human hit: " << x << " " << y << "\n";
 }
@@ -78,10 +67,31 @@ void Player::notifyOnSunk() {
 }
 
 int Player::checkMove(int x, int y) {
-	if (1 == field[y][y])
-		return battleships::playerState::INJURED;
+	if (1 == field[x][y])
+	{
+		if(isAnyShipSunk(x, y)) {
+			numberOfSunkShips++;
+
+			if (numberOfSunkShips == 10)
+			{
+				return battleships::playerState::DEFEATED;
+			}
+			else
+			{
+				return battleships::playerState::SUNK;
+			}
+		}
+		else 
+		{
+			return battleships::playerState::INJURED;
+		}
+
+		enemyMoves[x][y] = 1;
+	}
 	else
+	{
 		return battleships::playerState::MISSED;
+	}
 }
 
 void Player::generateShips() {
@@ -196,4 +206,21 @@ void Player::setCursorPosition(int column, int row) const
 	coord.X = column;
 	coord.Y = row;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+
+void Player::setInput(char letter, char digit)
+{
+	this->lastLetter = letter;
+	this->lastDigit = digit;
+}
+
+int Player::getNumberOfSunkShips()
+{
+	return 0;
+}
+
+bool Player::isAnyShipSunk(int x, int y) const
+{
+	//TODO:
+	return false;
 }

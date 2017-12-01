@@ -21,17 +21,30 @@ public:
 	void notifyOnInjured();
 	void notifyOnSunk();
 	int checkMove(int x, int y);
+
+	void setInput(char letter, char digit);
+
+	int getNumberOfSunkShips();
+
 protected:
 	//------------------------------------
 	std::ofstream myfile;
 	//------------------------------------
 private:
 	std::vector<std::vector<int> > field;
+	std::vector<std::vector<int> > enemyMoves;
+
+	int numberOfSunkShips;
+
+	char lastLetter;
+	char lastDigit;
 
 	void generateShips();
 	void generateShip(const int size);
 	bool checkPlace(int x, int y, bool isHorizontal, int size);
 	void setCursorPosition(int column, int row) const;
+
+	bool isAnyShipSunk(int x, int y) const;
 };
 
 #endif /* SRC_PLAYER_H_ */

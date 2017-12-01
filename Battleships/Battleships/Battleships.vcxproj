@@ -113,16 +113,28 @@
   <ItemGroup>
     <ClCompile Include="Battleships.cpp" />
     <ClCompile Include="ComputerPlayer.cpp" />
+    <ClCompile Include="EndOfGameState.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerOneMoveState.cpp" />
+    <ClCompile Include="PlayerTwoMoveState.cpp" />
+    <ClCompile Include="State.cpp" />
+    <ClCompile Include="WaitForInputState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Battleships.h" />
     <ClInclude Include="BattleshipsHelper.h" />
     <ClInclude Include="ComputerPlayer.h" />
+    <ClInclude Include="EndOfGameState.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="PauseState.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerOneMoveState.h" />
+    <ClInclude Include="PlayerTwoMoveState.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="WaitForInputState.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />
