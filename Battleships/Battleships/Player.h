@@ -9,6 +9,7 @@
 #include <Windows.h>
 
 #include "BattleshipsHelper.h"
+#include "Ship.h"
 
 class Player {
 public:
@@ -27,12 +28,11 @@ public:
 	int getNumberOfSunkShips();
 
 protected:
-	//------------------------------------
-	std::ofstream myfile;
-	//------------------------------------
 private:
 	std::vector<std::vector<int> > field;
 	std::vector<std::vector<int> > enemyMoves;
+
+	std::vector<Ship> fleet;
 
 	int numberOfSunkShips;
 

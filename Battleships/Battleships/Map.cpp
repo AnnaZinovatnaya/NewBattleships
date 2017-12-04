@@ -27,8 +27,8 @@ Map::Map(std::vector<std::vector<int> > field1) {
 
 	this->map = map;
 
-	for (int i = 0; i < 10; ++i) {
-		for (int j = 0; j < 10; ++j)
+	for (int i = 0; i < battleships::FIELD_SIZE; ++i) {
+		for (int j = 0; j < battleships::FIELD_SIZE; ++j)
 			if (1 == field1[i][j])
 				this->map[i + 2][j + 3] = 'S';
 	}
@@ -50,7 +50,7 @@ void Map::draw() {
 	std::cout << "Press 'p' to pause the game";
 	std::cout << "\n";
 	std::cout << "\n";
-	std::cout << "Type digit and character and press ENTER to hit:\n";
+	std::cout << "Type character and digit and press ENTER to hit:\n";
 }
 
 void Map::notifyOnMove(int player, int x, int y, bool success) {

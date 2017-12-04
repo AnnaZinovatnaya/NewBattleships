@@ -1,6 +1,7 @@
 #include "Battleships.h"
 
-Battleships::Battleships() {
+Battleships::Battleships() 
+{
 	srand(time(0));
 
 	player1 = new Player();
@@ -11,7 +12,8 @@ Battleships::Battleships() {
 	previousState = NULL;
 }
 
-Battleships::~Battleships() {
+Battleships::~Battleships() 
+{
 	if (0 != player1) {
 		delete player1;
 	}
@@ -67,7 +69,10 @@ void Battleships::printWelcomeMessage() {
 
 void Battleships::changeState(State * newState)
 {
-	delete previousState;
+	if (NULL != previousState)
+	{
+		delete previousState;
+	}
 
 	previousState = currentState;
 	currentState = newState;
@@ -92,4 +97,13 @@ Player * Battleships::getPlayerTwo()
 clock_t Battleships::getStartTime()
 {
 	return startTime;
+}
+
+void Battleships::returnPreviousState()
+{
+	State * temp = currentState;
+	currentState = previousState;
+	previousState = temp;
+
+	currentState->doJob();
 }

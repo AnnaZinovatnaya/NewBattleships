@@ -1,4 +1,6 @@
-﻿  Player.cpp
+﻿  Ship.cpp
+  Player.cpp
+  ComputerPlayer.cpp
   Generating Code...
   Compiling...
   WaitForInputState.cpp
@@ -7,11 +9,7 @@
   PauseState.cpp
   Main.cpp
   EndOfGameState.cpp
-  ComputerPlayer.cpp
   Battleships.cpp
-e:\newbattleships\battleships\battleships\battleships.cpp(4): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Generating Code...
-  Compiling...
-  State.cpp
+e:\newbattleships\battleships\battleships\battleships.cpp(5): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Generating Code...
   Battleships.vcxproj -> E:\NewBattleships\Battleships\Debug\Battleships.exe

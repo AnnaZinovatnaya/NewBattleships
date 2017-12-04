@@ -10,6 +10,8 @@ public:
 	~ComputerPlayer();
 
 	void makeMove(int & x, int & y);
+private:
+	std::vector<std::vector<int> > moves;
 };
 
 #endif /* SRC_COMPUTERPLAYER_H_ */

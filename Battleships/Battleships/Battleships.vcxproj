@@ -120,6 +120,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerOneMoveState.cpp" />
     <ClCompile Include="PlayerTwoMoveState.cpp" />
+    <ClCompile Include="Ship.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="WaitForInputState.cpp" />
   </ItemGroup>
@@ -133,6 +134,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerOneMoveState.h" />
     <ClInclude Include="PlayerTwoMoveState.h" />
+    <ClInclude Include="Ship.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="WaitForInputState.h" />
   </ItemGroup>

@@ -1,12 +1,12 @@
 #include "Player.h"
 
 Player::Player() {
-	std::vector<int> row(10, 0);
-	std::vector<std::vector<int> > field(10, row);
+	std::vector<int> row(battleships::FIELD_SIZE, 0);
+	std::vector<std::vector<int> > field(battleships::FIELD_SIZE, row);
 
 	this->field = field;
 
-	std::vector<std::vector<int> > enemyMoves(10, row);
+	std::vector<std::vector<int> > enemyMoves(battleships::FIELD_SIZE, row);
 
 	this->enemyMoves = enemyMoves;
 
@@ -16,26 +16,9 @@ Player::Player() {
 	numberOfSunkShips = 0;
 
 	generateShips();
-
-	//------------------------------------
-	myfile.open("log.txt", std::ios::app);
-	myfile.clear();
-	//------------------------------------
-
-	myfile << "Generated ships:\n\n";
-	for (int i = 0; i < 10; i++) {
-		for (int j = 0; j < 10; j++)
-			myfile << this->field[i][j];
-		myfile << "\n";
-	}
-	myfile << "\n";
-			
 }
 
 Player::~Player() {
-	//------------------------------------
-	myfile.close();
-	//------------------------------------
 }
 
 void Player::makeMove(int & x, int & y) {
@@ -51,7 +34,6 @@ void Player::makeMove(int & x, int & y) {
 
 	y = lastDigit % '0';
 
-	myfile << "Human hit: " << x << " " << y << "\n";
 }
 
 std::vector<std::vector<int> > Player::getField() {
@@ -72,7 +54,7 @@ int Player::checkMove(int x, int y) {
 		if(isAnyShipSunk(x, y)) {
 			numberOfSunkShips++;
 
-			if (numberOfSunkShips == 10)
+			if (numberOfSunkShips == battleships::NUMBER_OF_SHIPS)
 			{
 				return battleships::playerState::DEFEATED;
 			}
@@ -115,8 +97,8 @@ void Player::generateShip(const int size) {
 
 	while (place == false)
 	{
-		x = rand() % 10;
-		y = rand() % 10;
+		x = rand() % battleships::FIELD_SIZE;
+		y = rand() % battleships::FIELD_SIZE;
 
 		int horizontal = rand() % 2;
 
@@ -136,6 +118,8 @@ void Player::generateShip(const int size) {
 		for (int i = x; i < x + size; i++)
 			field[i][y] = 1;
 	}
+
+	fleet.push_back(Ship(x, y, size, isHorizontal));
 }
 
 bool Player::checkPlace(int x, int y, bool isHorizontal, int size) {
@@ -144,7 +128,7 @@ bool Player::checkPlace(int x, int y, bool isHorizontal, int size) {
 
 	if (isHorizontal) {
 		//check if the ship fits
-		if (y > 10 - size)
+		if (y > battleships::FIELD_SIZE - size)
 			return false;
 		for (int i = y + 1; i < y + size; i++)
 		{
@@ -155,11 +139,11 @@ bool Player::checkPlace(int x, int y, bool isHorizontal, int size) {
 		//check if cells around the ship are empty
 		for (int i = x - 1; i < x + 2; i++)
 		{
-			if (i > -1 && i < 10)
+			if (i > -1 && i < battleships::FIELD_SIZE)
 			{
 				for (int j = y - 1; j < y + size + 1; j++)
 				{
-					if (j > -1 && j < 10)
+					if (j > -1 && j < battleships::FIELD_SIZE)
 					{
 						if (field[i][j] == 1)
 							return false;
@@ -183,11 +167,11 @@ bool Player::checkPlace(int x, int y, bool isHorizontal, int size) {
 		//check if cells around the ship are empty
 		for (int i = x - 1; i < x + size + 1; i++)
 		{
-			if (i > -1 && i < 10)
+			if (i > -1 && i < battleships::FIELD_SIZE)
 			{
 				for (int j = y - 1; j < y + 2; j++)
 				{
-					if (j > -1 && j < 10)
+					if (j > -1 && j < battleships::FIELD_SIZE)
 					{
 						if (field[i][j] == 1)
 							return false;

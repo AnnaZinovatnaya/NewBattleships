@@ -26,6 +26,8 @@ public:
 	Map * getMap();
 
 	clock_t getStartTime();
+
+	void returnPreviousState();
 protected:
 private:
 
