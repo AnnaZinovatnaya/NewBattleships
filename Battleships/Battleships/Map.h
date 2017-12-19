@@ -17,7 +17,6 @@ public:
 protected:
 private:
 	static const int  VERTICAL_SIZE = 13, HORIZONTAL_SIZE = 49;
-
 	std::vector<std::vector<char> > map;
 };
 

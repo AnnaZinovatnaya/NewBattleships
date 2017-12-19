@@ -55,7 +55,8 @@ void Battleships::waitForEnterPressed() const
 	}
 }
 
-void Battleships::printWelcomeMessage() {
+void Battleships::printWelcomeMessage() const 
+{
 	std::cout << "\n";
 	std::cout << " *************************************" << std::endl;
 	std::cout << " *                                   *" << std::endl;

@@ -43,7 +43,7 @@ private:
 
 	void waitForEnterPressed() const;
 
-	void printWelcomeMessage();
+	void printWelcomeMessage() const;
 };
 
 #endif /* SRC_BATTLESHIPS_H_ */
