@@ -1,1 +1,6 @@
-*.ipch
+# ignore an entire directory
+/Battleships/Debug/
+/Battleships/Battleships/Debug/
+/Battleships/.vs/
+
+
