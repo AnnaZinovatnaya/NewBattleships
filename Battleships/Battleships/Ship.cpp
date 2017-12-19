@@ -7,6 +7,7 @@ Ship::Ship()
 	size = 0;
 	isHorizontal = false;
 	isSunk = false;
+	successfulHits = 0;
 }
 
 
@@ -18,6 +19,7 @@ Ship::Ship(int x, int y, int size, bool isHorizontal)
 	this->size = size;
 	this->isHorizontal = isHorizontal;
 	this->isSunk = false;
+	successfulHits = 0;
 }
 
 
@@ -55,7 +57,15 @@ bool Ship::isSunkCheck(int enemyHits[battleships::FIELD_SIZE][battleships::FIELD
 	return true;
 }
 
+bool Ship::isSunkCheck() const
+{
+	if (successfulHits == size)
+	{
+		return true;
+	}
 
+	return false;
+}
 
 bool Ship::isShipCoordinates(int hitX, int hitY) const
 {
@@ -81,4 +91,9 @@ bool Ship::isShipCoordinates(int hitX, int hitY) const
 	}
 
 	return false;
+}
+
+void Ship::increaseSuccessfulHits()
+{
+	++successfulHits;
 }

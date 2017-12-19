@@ -26,6 +26,7 @@ void PlayerOneMoveState::doJob()
 	case battleships::playerState::SUNK:
 		this->context->getPlayerOne()->notifyOnSunk();
 		this->context->getMap()->notifyOnMove(battleships::players::PLAYER_1, x, y, battleships::move::SUCCESS);
+		printSunkMessage();
 		this->context->changeState(new PlayerTwoMoveState(this->context));
 		break;
 	case battleships::playerState::DEFEATED:
@@ -38,4 +39,21 @@ void PlayerOneMoveState::doJob()
 		this->context->changeState(new PlayerTwoMoveState(this->context));
 		break;
 	}
+}
+
+void PlayerOneMoveState::setCursorPosition(int column, int row) const
+{
+	COORD coord;
+	coord.X = column;
+	coord.Y = row;
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+
+void PlayerOneMoveState::printSunkMessage()
+{
+	std::cout << "You sunk enemy's ship!";
+	Sleep(1000);
+	setCursorPosition(0, battleships::USER_INPUT_ROW);
+	std::cout << "                      ";
+	setCursorPosition(0, battleships::USER_INPUT_ROW);
 }

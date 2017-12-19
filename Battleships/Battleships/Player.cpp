@@ -51,24 +51,41 @@ void Player::notifyOnSunk() {
 int Player::checkMove(int x, int y) {
 	if (1 == field[x][y])
 	{
-		if(isAnyShipSunk(x, y)) {
-			numberOfSunkShips++;
-
-			if (numberOfSunkShips == battleships::NUMBER_OF_SHIPS)
-			{
-				return battleships::playerState::DEFEATED;
-			}
-			else
-			{
-				return battleships::playerState::SUNK;
-			}
-		}
-		else 
+		for (Ship & ship : fleet)
 		{
-			return battleships::playerState::INJURED;
+			if (true == ship.isShipCoordinates(x, y))
+			{
+				if (1 == enemyMoves[x][y]) {
+					return battleships::playerState::INJURED;
+				}
+				else
+				{
+					ship.increaseSuccessfulHits();
+					if (true == ship.isSunkCheck())
+					{
+						numberOfSunkShips++;
+
+						if (numberOfSunkShips == battleships::NUMBER_OF_SHIPS)
+						{
+							enemyMoves[x][y] = 1;
+							return battleships::playerState::DEFEATED;
+						}
+						else
+						{
+							enemyMoves[x][y] = 1;
+							return battleships::playerState::SUNK;
+						}
+					}
+					else
+					{
+						enemyMoves[x][y] = 1;
+						return battleships::playerState::INJURED;
+					}
+				}
+			}
 		}
 
-		enemyMoves[x][y] = 1;
+		
 	}
 	else
 	{
@@ -123,7 +140,7 @@ void Player::generateShip(const int size) {
 }
 
 bool Player::checkPlace(int x, int y, bool isHorizontal, int size) {
-	if (field[x][y] == 1)
+	if (1 == field[x][y])
 		return false;
 
 	if (isHorizontal) {
@@ -200,11 +217,24 @@ void Player::setInput(char letter, char digit)
 
 int Player::getNumberOfSunkShips()
 {
-	return 0;
+	return numberOfSunkShips;
 }
 
 bool Player::isAnyShipSunk(int x, int y) const
 {
-	//TODO:
+	if (0 == enemyMoves[x][y])
+	{
+		for (const Ship & ship : fleet)
+		{
+			if (true == ship.isShipCoordinates(x, y))
+			{
+				if (true == ship.isSunkCheck())
+				{
+					return true;
+				}
+			}
+		}
+	}
+
 	return false;
 }

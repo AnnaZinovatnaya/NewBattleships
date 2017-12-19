@@ -5,7 +5,6 @@
 #include <vector>
 #include <conio.h>
 #include <iostream>
-#include <fstream>
 #include <Windows.h>
 
 #include "BattleshipsHelper.h"
@@ -31,7 +30,6 @@ protected:
 private:
 	std::vector<std::vector<int> > field;
 	std::vector<std::vector<int> > enemyMoves;
-
 	std::vector<Ship> fleet;
 
 	int numberOfSunkShips;
@@ -43,7 +41,6 @@ private:
 	void generateShip(const int size);
 	bool checkPlace(int x, int y, bool isHorizontal, int size);
 	void setCursorPosition(int column, int row) const;
-
 	bool isAnyShipSunk(int x, int y) const;
 };
 

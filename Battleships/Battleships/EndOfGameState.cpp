@@ -18,9 +18,27 @@ void EndOfGameState::doJob()
 	int playerTwoSunkShips = this->context->getPlayerTwo()->getNumberOfSunkShips();
 	int timeOfGame = (clock() - this->context->getStartTime()) / CLOCKS_PER_SEC;
 
+	setCursorPosition(0, battleships::USER_INPUT_ROW - 3);
+	if (battleships::NUMBER_OF_SHIPS == playerOneSunkShips)
+	{
+		std::cout << "You lost :(                " << std::endl;
+	}
+	else
+	{
+		std::cout << "You won! Congratulations!  " << std::endl;
+	}
+
 	std::cout << std::endl;
-	std::cout << "You sunk " << playerTwoSunkShips  << " of enemy's ships"<< std::endl;
+	std::cout << "You sunk " << playerTwoSunkShips  << " of enemy's ships                      "<< std::endl;
 	std::cout << "Enemy sunk " << playerOneSunkShips << " of your ships" << std::endl;
 	std::cout << "Time: " << timeOfGame << " seconds" << std::endl;
 	std::cout << std::endl;
+}
+
+void EndOfGameState::setCursorPosition(int column, int row) const
+{
+	COORD coord;
+	coord.X = column;
+	coord.Y = row;
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }

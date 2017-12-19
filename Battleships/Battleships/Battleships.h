@@ -5,10 +5,10 @@
 #include <conio.h>
 #include <iostream>
 
-#include "Player.h"
+#include "BattleshipsHelper.h"
 #include "ComputerPlayer.h"
 #include "Map.h"
-#include "BattleshipsHelper.h"
+#include "Player.h"
 #include "State.h"
 #include "WaitForInputState.h"
 
@@ -30,7 +30,6 @@ public:
 	void returnPreviousState();
 protected:
 private:
-
 	Map * map;
 	Player * player1;
 	Player * player2;

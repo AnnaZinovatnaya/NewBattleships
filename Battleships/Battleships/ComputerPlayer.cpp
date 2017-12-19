@@ -9,7 +9,6 @@ ComputerPlayer::ComputerPlayer() {
 }
 
 ComputerPlayer::~ComputerPlayer() {
-	// TODO Auto-generated destructor stub
 }
 
 void ComputerPlayer::makeMove(int & x, int & y) {

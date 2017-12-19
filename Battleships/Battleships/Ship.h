@@ -24,6 +24,9 @@ public:
 
 	int getSize() const { return size; }
 
+	bool isSunkCheck() const;
+	void increaseSuccessfulHits();
+
 
 private:
 	int x;
@@ -31,6 +34,7 @@ private:
 	int size;
 	bool isHorizontal;
 	bool isSunk;
+	int successfulHits;
 };
 
 #endif /* SRC_SHIP_H_ */
