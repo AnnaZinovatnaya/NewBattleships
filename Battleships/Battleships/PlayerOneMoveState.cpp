@@ -41,19 +41,11 @@ void PlayerOneMoveState::doJob()
 	}
 }
 
-void PlayerOneMoveState::setCursorPosition(int column, int row) const
-{
-	COORD coord;
-	coord.X = column;
-	coord.Y = row;
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-}
-
 void PlayerOneMoveState::printSunkMessage()
 {
 	std::cout << "You sunk enemy's ship!";
 	Sleep(1000);
-	setCursorPosition(0, battleships::USER_INPUT_ROW);
+	battleships::Helper::setCursorPosition(0, battleships::USER_INPUT_ROW);
 	std::cout << "                      ";
-	setCursorPosition(0, battleships::USER_INPUT_ROW);
+	battleships::Helper::setCursorPosition(0, battleships::USER_INPUT_ROW);
 }

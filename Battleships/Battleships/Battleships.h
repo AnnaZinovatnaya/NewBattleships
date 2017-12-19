@@ -2,7 +2,6 @@
 #define SRC_BATTLESHIPS_H_
 
 #include <ctime>
-#include <conio.h>
 #include <iostream>
 
 #include "BattleshipsHelper.h"
@@ -40,8 +39,6 @@ private:
 	State * previousState;
 
 	int getCurrentTimeInSec();
-
-	void waitForEnterPressed() const;
 
 	void printWelcomeMessage() const;
 };

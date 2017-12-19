@@ -21,8 +21,6 @@ private:
 
 	bool isLetter(char input);
 	bool isDigit(char input);
-
-	void setCursorPosition(int column, int row) const;
 };
 
 #endif /* SRC_WAITFORINPUTSTATE_H_ */

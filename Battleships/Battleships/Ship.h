@@ -11,7 +11,7 @@ public:
 
 	bool isShipCoordinates(int hitX, int hitY) const;
 
-	bool isSunkCheck() const;
+	bool isSunk() const;
 	void increaseSuccessfulHits();
 
 
@@ -20,7 +20,6 @@ private:
 	int y;
 	int size;
 	bool isHorizontal;
-	bool isSunk;
 	int successfulHits;
 };
 

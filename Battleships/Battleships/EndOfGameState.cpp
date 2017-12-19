@@ -20,7 +20,7 @@ void EndOfGameState::doJob()
 
 	
 	
-	setCursorPosition(0, battleships::USER_INPUT_ROW - 3);
+	battleships::Helper::setCursorPosition(0, battleships::USER_INPUT_ROW - 3);
 	if (battleships::NUMBER_OF_SHIPS == playerOneSunkShips)
 	{
 		std::cout << "You lost :(                " << std::endl;
@@ -33,25 +33,16 @@ void EndOfGameState::doJob()
 	std::cout << std::endl;
 	std::cout << "You sunk " << playerTwoSunkShips  << " of enemy's ships                      "<< std::endl;
 	std::cout << "Enemy sunk " << playerOneSunkShips << " of your ships" << std::endl;
-	std::cout << "Time: " << timeOfGame << " seconds" << std::endl;
+	std::cout << std::endl;
+
+	int minutes = static_cast<int>(timeOfGame / 60);
+	std::cout << "Time: " << minutes << " minute(s) ";
+	std::cout << timeOfGame - (minutes * 60) << " second(s)" << std::endl;
+
 	std::cout << std::endl;
 	std::cout << "Press ENTER to exit..." << std::endl;
 
-	char keyPressed = 0;
-	const char ENTER_KEY = '\r';
-
-	while (ENTER_KEY != keyPressed)
-	{
-		keyPressed = _getch();
-	}
+	battleships::Helper::waitForEnterPressed();
 
 	exit(0);
-}
-
-void EndOfGameState::setCursorPosition(int column, int row) const
-{
-	COORD coord;
-	coord.X = column;
-	coord.Y = row;
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }

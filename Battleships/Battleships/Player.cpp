@@ -49,48 +49,44 @@ void Player::notifyOnSunk() {
 }
 
 int Player::checkMove(int x, int y) {
-	if (1 == field[x][y])
+	if (0 == field[x][y])
 	{
-		for (Ship & ship : fleet)
-		{
-			if (true == ship.isShipCoordinates(x, y))
-			{
-				if (1 == enemyMoves[x][y]) {
-					return battleships::playerState::INJURED;
-				}
-				else
-				{
-					ship.increaseSuccessfulHits();
-					if (true == ship.isSunkCheck())
-					{
-						numberOfSunkShips++;
+		return battleships::playerState::MISSED;
+	}
 
-						if (numberOfSunkShips == battleships::NUMBER_OF_SHIPS)
-						{
-							enemyMoves[x][y] = 1;
-							return battleships::playerState::DEFEATED;
-						}
-						else
-						{
-							enemyMoves[x][y] = 1;
-							return battleships::playerState::SUNK;
-						}
+	for (Ship & ship : fleet)
+	{
+		if (true == ship.isShipCoordinates(x, y))
+		{
+			if (1 == enemyMoves[x][y]) {
+				return battleships::playerState::INJURED;
+			}
+			else
+			{
+				ship.increaseSuccessfulHits();
+
+				if (ship.isSunk())
+				{
+					numberOfSunkShips++;
+
+					if (numberOfSunkShips == battleships::NUMBER_OF_SHIPS)
+					{
+						return battleships::playerState::DEFEATED;
 					}
 					else
 					{
 						enemyMoves[x][y] = 1;
-						return battleships::playerState::INJURED;
+						return battleships::playerState::SUNK;
 					}
+				}
+				else
+				{
+					enemyMoves[x][y] = 1;
+					return battleships::playerState::INJURED;
 				}
 			}
 		}
-
-		
-	}
-	else
-	{
-		return battleships::playerState::MISSED;
-	}
+	}	
 }
 
 void Player::generateShips() {
@@ -201,14 +197,6 @@ bool Player::checkPlace(int x, int y, bool isHorizontal, int size) {
 	return true;
 }
 
-void Player::setCursorPosition(int column, int row) const
-{
-	COORD coord;
-	coord.X = column;
-	coord.Y = row;
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-}
-
 void Player::setInput(char letter, char digit)
 {
 	this->lastLetter = letter;
@@ -218,23 +206,4 @@ void Player::setInput(char letter, char digit)
 int Player::getNumberOfSunkShips()
 {
 	return numberOfSunkShips;
-}
-
-bool Player::isAnyShipSunk(int x, int y) const
-{
-	if (0 == enemyMoves[x][y])
-	{
-		for (const Ship & ship : fleet)
-		{
-			if (true == ship.isShipCoordinates(x, y))
-			{
-				if (true == ship.isSunkCheck())
-				{
-					return true;
-				}
-			}
-		}
-	}
-
-	return false;
 }

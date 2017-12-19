@@ -1,6 +1,9 @@
 #ifndef SRC_BATTLESHIPSHELPER_H_
 #define SRC_BATTLESHIPSHELPER_H_
 
+#include <Windows.h>
+#include <conio.h>
+
 namespace battleships {
 	const int FIELD_SIZE = 10;
 	const int NUMBER_OF_SHIPS = 10;
@@ -22,6 +25,29 @@ namespace battleships {
 	enum move {
 		MISS = 0,
 		SUCCESS = 1,
+	};
+
+	class Helper
+	{
+	public:
+		inline static void setCursorPosition(int column, int row) 
+		{
+			COORD coord;
+			coord.X = column;
+			coord.Y = row;
+			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+		}
+
+		inline static void waitForEnterPressed()
+		{
+			char keyPressed = 0;
+			const char ENTER_KEY = '\r';
+
+			while (ENTER_KEY != keyPressed)
+			{
+				keyPressed = _getch();
+			}
+		}
 	};
 }
 

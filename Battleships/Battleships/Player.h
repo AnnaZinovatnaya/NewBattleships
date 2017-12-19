@@ -40,8 +40,6 @@ private:
 	void generateShips();
 	void generateShip(const int size);
 	bool checkPlace(int x, int y, bool isHorizontal, int size);
-	void setCursorPosition(int column, int row) const;
-	bool isAnyShipSunk(int x, int y) const;
 };
 
 #endif /* SRC_PLAYER_H_ */

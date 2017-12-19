@@ -6,15 +6,14 @@ Ship::Ship(int x, int y, int size, bool isHorizontal)
 	this->y = y;
 	this->size = size;
 	this->isHorizontal = isHorizontal;
-	this->isSunk = false;
-	successfulHits = 0;
+	this->successfulHits = 0;
 }
 
 Ship::~Ship()
 {
 }
 
-bool Ship::isSunkCheck() const
+bool Ship::isSunk() const
 {
 	return successfulHits == size;
 }

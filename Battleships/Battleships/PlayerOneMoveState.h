@@ -17,7 +17,6 @@ public:
 private:
 	class Battleships * context;
 
-	void setCursorPosition(int column, int row) const;
 	void printSunkMessage();
 };
 

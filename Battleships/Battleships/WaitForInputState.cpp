@@ -38,9 +38,9 @@ void WaitForInputState::doJob()
 			{
 				this->context->getPlayerOne()->setInput(input1, input2);
 
-				setCursorPosition(0, battleships::USER_INPUT_ROW);
+				battleships::Helper::setCursorPosition(0, battleships::USER_INPUT_ROW);
 				std::cout << "   ";
-				setCursorPosition(0, battleships::USER_INPUT_ROW);
+				battleships::Helper::setCursorPosition(0, battleships::USER_INPUT_ROW);
 
 				this->context->changeState(new PlayerOneMoveState(this->context));
 
@@ -48,12 +48,12 @@ void WaitForInputState::doJob()
 			}
 			else
 			{
-				setCursorPosition(0, battleships::USER_INPUT_ROW);
+				battleships::Helper::setCursorPosition(0, battleships::USER_INPUT_ROW);
 				std::cout << "Incorrect input!";
 				Sleep(1000);
-				setCursorPosition(0, battleships::USER_INPUT_ROW);
+				battleships::Helper::setCursorPosition(0, battleships::USER_INPUT_ROW);
 				std::cout << "                ";
-				setCursorPosition(0, battleships::USER_INPUT_ROW);
+				battleships::Helper::setCursorPosition(0, battleships::USER_INPUT_ROW);
 			}
 		}
 	}
@@ -76,12 +76,4 @@ bool WaitForInputState::isDigit(char input)
 		return true;
 
 	return false;
-}
-
-void WaitForInputState::setCursorPosition(int column, int row) const
-{
-	COORD coord;
-	coord.X = column;
-	coord.Y = row;
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }

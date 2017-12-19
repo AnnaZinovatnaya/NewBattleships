@@ -31,7 +31,7 @@ void Battleships::play() {
 
 	printWelcomeMessage();
 
-	waitForEnterPressed();
+	battleships::Helper::waitForEnterPressed();
 
 	map->draw();
 
@@ -42,17 +42,6 @@ void Battleships::play() {
 
 int Battleships::getCurrentTimeInSec() {
 	return static_cast<int>(clock() - startTime) / CLOCKS_PER_SEC;
-}
-
-void Battleships::waitForEnterPressed() const
-{
-	char keyPressed = 0;
-	const char ENTER_KEY = '\r';
-
-	while (ENTER_KEY != keyPressed)
-	{
-		keyPressed = _getch();
-	}
 }
 
 void Battleships::printWelcomeMessage() const 

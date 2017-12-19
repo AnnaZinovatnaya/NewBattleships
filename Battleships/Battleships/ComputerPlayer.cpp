@@ -5,7 +5,6 @@ ComputerPlayer::ComputerPlayer() {
 	std::vector<std::vector<int> > moves(battleships::FIELD_SIZE, row);
 
 	this->moves = moves;
-
 }
 
 ComputerPlayer::~ComputerPlayer() {
