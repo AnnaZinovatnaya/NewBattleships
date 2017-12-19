@@ -15,6 +15,7 @@ PlayerTwoMoveState::~PlayerTwoMoveState()
 
 void PlayerTwoMoveState::doJob()
 {
+
 	int x = 0;
 	int y = 0;
 

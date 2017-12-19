@@ -1,6 +1,6 @@
 # ignore an entire directory
-/Battleships/Debug/
-/Battleships/Battleships/Debug/
-/Battleships/.vs/
+Battleships/Debug/
+Battleships/Battleships/Debug/
+Battleships/.vs/
 
 
