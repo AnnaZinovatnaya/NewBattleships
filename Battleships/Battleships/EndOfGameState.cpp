@@ -18,6 +18,8 @@ void EndOfGameState::doJob()
 	int playerTwoSunkShips = this->context->getPlayerTwo()->getNumberOfSunkShips();
 	int timeOfGame = (clock() - this->context->getStartTime()) / CLOCKS_PER_SEC;
 
+	
+	
 	setCursorPosition(0, battleships::USER_INPUT_ROW - 3);
 	if (battleships::NUMBER_OF_SHIPS == playerOneSunkShips)
 	{
