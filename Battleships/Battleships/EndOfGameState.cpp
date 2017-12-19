@@ -35,6 +35,17 @@ void EndOfGameState::doJob()
 	std::cout << "Enemy sunk " << playerOneSunkShips << " of your ships" << std::endl;
 	std::cout << "Time: " << timeOfGame << " seconds" << std::endl;
 	std::cout << std::endl;
+	std::cout << "Press ENTER to exit..." << std::endl;
+
+	char keyPressed = 0;
+	const char ENTER_KEY = '\r';
+
+	while (ENTER_KEY != keyPressed)
+	{
+		keyPressed = _getch();
+	}
+
+	exit(0);
 }
 
 void EndOfGameState::setCursorPosition(int column, int row) const
